@@ -16,9 +16,9 @@ public class PessoaServiceImpl
 
     public Pessoa converterString(Pessoa pessoa)
     {
-        String nome = pessoa.getNome().toUpperCase().trim();
-        String sobrenome = pessoa.getSobrenome().toUpperCase().trim();
-        String login = pessoa.getLogin().trim();
+        String nome = pessoa.getNome().toUpperCase().replace(" ", "");
+        String sobrenome = pessoa.getSobrenome().toUpperCase().replace(" ", "");
+        String login = pessoa.getLogin().replace(" ", "");
         pessoa.setNome(nome);
         pessoa.setSobrenome(sobrenome);
         pessoa.setLogin(login);
