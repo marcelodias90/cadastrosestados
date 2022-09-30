@@ -17,11 +17,11 @@ public class UF
     @Column(name = "CODIGO_UF")
     private Long codigoUF;
 
-    @Column(name = "NOME", length = 100)
+    @Column(name = "NOME", length = 100 )
     @NotEmpty(message = "{campo.nome.obrigatorio}")
     private String nome;
 
-    @Column(name = "SIGLA", length = 2)
+    @Column(name = "SIGLA", length = 2 )
     @NotEmpty(message = "{campo.sigla.obrigatorio}")
     private String sigla;
 

@@ -1,9 +1,12 @@
 package marcelodias.cadastroEstados.rest.controller;
 
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import marcelodias.cadastroEstados.domain.entity.Endereco;
 import marcelodias.cadastroEstados.domain.entity.repository.Enderecos;
 import marcelodias.cadastroEstados.exception.RegradeNegocioException;
+import marcelodias.cadastroEstados.service.impl.EnderecoServiceImpl;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
@@ -18,8 +21,11 @@ public class EnderecoController
 {
     private Enderecos enderecos;
 
-    public EnderecoController(Enderecos enderecos) {
+    private EnderecoServiceImpl service;
+
+    public EnderecoController(Enderecos enderecos, EnderecoServiceImpl service) {
         this.enderecos = enderecos;
+        this.service = service;
     }
 
     @GetMapping("{CODIGO_ENDERECO}")
@@ -32,6 +38,7 @@ public class EnderecoController
     @ResponseStatus(HttpStatus.CREATED)
     public Endereco save(@RequestBody @Valid Endereco endereco)
     {
+        service.converterString(endereco);
         return enderecos.save(endereco);
     }
 

@@ -16,7 +16,8 @@ public class BairroServiceImpl
     @Autowired
     private Bairros bairros;
 
-        public Bairro converterString(Bairro bairro)
+
+    public Bairro converterString(Bairro bairro)
         {
             String nome = bairro.getNome().toUpperCase();
             bairro.setNome(nome);
