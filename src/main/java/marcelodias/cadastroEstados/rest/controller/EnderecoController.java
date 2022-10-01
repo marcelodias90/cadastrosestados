@@ -1,11 +1,10 @@
 package marcelodias.cadastroEstados.rest.controller;
 
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import marcelodias.cadastroEstados.domain.entity.Endereco;
 import marcelodias.cadastroEstados.domain.entity.repository.Enderecos;
 import marcelodias.cadastroEstados.exception.RegradeNegocioException;
+import marcelodias.cadastroEstados.rest.controller.dto.InformacaoEnderecoDTO;
 import marcelodias.cadastroEstados.service.impl.EnderecoServiceImpl;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -29,9 +28,9 @@ public class EnderecoController
     }
 
     @GetMapping("{CODIGO_ENDERECO}")
-    public Endereco getEnderecoById(@PathVariable Long id)
+    public InformacaoEnderecoDTO getEnderecoById(@PathVariable("CODIGO_ENDERECO") Long id)
     {
-        return enderecos.findById(id).orElseThrow(()-> new RegradeNegocioException("Endereço não encontrado"));
+        return enderecos.findById(id).map(m-> converter(m)).orElseThrow(()-> new RegradeNegocioException("Endereço não encontrado"));
     }
 
     @PostMapping
@@ -58,5 +57,12 @@ public class EnderecoController
 
         Example example = Example.of(enderecoFiltro, matcher);
         return enderecos.findAll(example);
+    }
+
+    private InformacaoEnderecoDTO converter(Endereco endereco)
+    {
+        return InformacaoEnderecoDTO.builder().codigoEndereco(endereco.getCodigoEndereco()).nome_Rua(endereco.getNome_Rua()).numero(endereco.getNumero())
+                .complemento(endereco.getComplemento()).cep(endereco.getCep()).bairro(endereco.getBairro().getNome()).municipio(endereco.getBairro().getMunicipio().getNome())
+                .uf(endereco.getBairro().getMunicipio().getUf().getNome()).nome(endereco.getPessoa().getNome()).sobrenome(endereco.getPessoa().getSobrenome()).build();
     }
 }
