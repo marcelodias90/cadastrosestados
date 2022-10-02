@@ -38,6 +38,7 @@ public class EnderecoController
     public Endereco save(@RequestBody @Valid Endereco endereco)
     {
         service.converterString(endereco);
+        service.enderecoExistente(endereco);
         return enderecos.save(endereco);
     }
 
@@ -61,7 +62,7 @@ public class EnderecoController
 
     private InformacaoEnderecoDTO converter(Endereco endereco)
     {
-        return InformacaoEnderecoDTO.builder().codigoEndereco(endereco.getCodigoEndereco()).nome_Rua(endereco.getNome_Rua()).numero(endereco.getNumero())
+        return InformacaoEnderecoDTO.builder().codigoEndereco(endereco.getCodigoEndereco()).nome_Rua(endereco.getNomeRua()).numero(endereco.getNumero())
                 .complemento(endereco.getComplemento()).cep(endereco.getCep()).bairro(endereco.getBairro().getNome()).municipio(endereco.getBairro().getMunicipio().getNome())
                 .uf(endereco.getBairro().getMunicipio().getUf().getNome()).nome(endereco.getPessoa().getNome()).sobrenome(endereco.getPessoa().getSobrenome()).build();
     }

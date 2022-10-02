@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface Enderecos extends JpaRepository<Endereco, Long>
 {
-
+    Endereco findEnderecoByNomeRuaAndNumero(String nomeRua, String numero);
 }

@@ -20,7 +20,7 @@ public class Endereco
 
     @Column(name = "NOME_RUA")
     @NotEmpty(message = "{campo.nome_Rua.obrigatorio}")
-    private String nome_Rua;
+    private String nomeRua;
 
     @Column(name = "NUMERO")
     @NotEmpty(message = "{campo.numero.obrigatorio}")
@@ -49,12 +49,12 @@ public class Endereco
         this.codigoEndereco = codigo_Endereco;
     }
 
-    public String getNome_Rua() {
-        return nome_Rua;
+    public String getNomeRua() {
+        return nomeRua;
     }
 
-    public void setNome_Rua(String nome_Rua) {
-        this.nome_Rua = nome_Rua;
+    public void setNomeRua(String nomeRua) {
+        this.nomeRua = nomeRua;
     }
 
     public String getNumero() {
